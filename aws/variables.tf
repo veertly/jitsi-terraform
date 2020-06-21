@@ -16,11 +16,13 @@ variable "email_address" {
 variable "admin_username" {
   description = "Moderator username. Only this user will be allowed to start meets."
   type        = string
+  default     = ""
 }
 
 variable "admin_password" {
   description = "Password for moderator user. Only this user will be allowed to start meets."
   type        = string
+  default     = ""
 }
 
 variable "enable_ssh_access" {
