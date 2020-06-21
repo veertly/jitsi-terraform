@@ -2,8 +2,8 @@
 set -e
 export HOSTNAME="${domain_name}"
 export EMAIL="${email_address}"
-ADMIN_USER="${admin_username}"
-ADMIN_PASSWORD="${admin_password}"
+#ADMIN_USER="${admin_username}"
+#ADMIN_PASSWORD="${admin_password}"
 
 echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 # disable ipv6
@@ -42,23 +42,23 @@ apt install -y jitsi-meet >> /debug.txt
 # letsencrypt
 echo $EMAIL | /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh >> /debug.txt
 
-PROSODY_CONF_FILE=/etc/prosody/conf.d/$HOSTNAME.cfg.lua
-sed -e 's/authentication \= "anonymous"/authentication \= "internal_plain"/' -i $PROSODY_CONF_FILE
-echo >> $PROSODY_CONF_FILE
-echo "VirtualHost \"guest.$HOSTNAME\"" >> $PROSODY_CONF_FILE
-echo "    authentication = \"anonymous\"" >> $PROSODY_CONF_FILE
-echo "    allow_empty_token = true" >> $PROSODY_CONF_FILE
-echo "    c2s_require_encryption = false" >> $PROSODY_CONF_FILE
-
-sed -e "s/\/\/ anonymousdomain: .*$/anonymousdomain: 'guest.$HOSTNAME',/" -i /etc/jitsi/meet/$HOSTNAME-config.js
-
-echo "org.jitsi.jicofo.auth.URL=XMPP:$HOSTNAME" >> /etc/jitsi/jicofo/sip-communicator.properties
+#PROSODY_CONF_FILE=/etc/prosody/conf.d/$HOSTNAME.cfg.lua
+#sed -e 's/authentication \= "anonymous"/authentication \= "internal_plain"/' -i $PROSODY_CONF_FILE
+#echo >> $PROSODY_CONF_FILE
+#echo "VirtualHost \"guest.$HOSTNAME\"" >> $PROSODY_CONF_FILE
+#echo "    authentication = \"anonymous\"" >> $PROSODY_CONF_FILE
+#echo "    allow_empty_token = true" >> $PROSODY_CONF_FILE
+#echo "    c2s_require_encryption = false" >> $PROSODY_CONF_FILE
+#
+#sed -e "s/\/\/ anonymousdomain: .*$/anonymousdomain: 'guest.$HOSTNAME',/" -i /etc/jitsi/meet/$HOSTNAME-config.js
+#
+#echo "org.jitsi.jicofo.auth.URL=XMPP:$HOSTNAME" >> /etc/jitsi/jicofo/sip-communicator.properties
 
 # Enable local STUN server
 sed -e "s/org\.ice4j\.ice\.harvest\.STUN_MAPPING_HARVESTER_ADDRESSES=.*/org.ice4j.ice.harvest.STUN_MAPPING_HARVESTER_ADDRESSES=$HOSTNAME:4446/" -i /etc/jitsi/videobridge/sip-communicator.properties
 
-echo "Enabling Moderator credentials for $ADMIN_USER" >> /debug.txt
-prosodyctl --config /etc/prosody/prosody.cfg.lua register $ADMIN_USER $HOSTNAME $ADMIN_PASSWORD
+#echo "Enabling Moderator credentials for $ADMIN_USER" >> /debug.txt
+#prosodyctl --config /etc/prosody/prosody.cfg.lua register $ADMIN_USER $HOSTNAME $ADMIN_PASSWORD
 
 ${jibri_installation_script}
 
