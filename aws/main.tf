@@ -130,7 +130,7 @@ resource "aws_route53_record" "jitsi" {
 }
 
 resource "aws_security_group" "allow_connections_jitsi-meet" {
-  name        = "allow_connections_jitsi-meet"
+  name        = "allow_connections_jitsi-meet-${local.subdomain}"
   description = "Allow traffic on UDP 10000 (JVB) TCP 443 (HTTPS) UDP 53 (DNS)"
 
   dynamic "ingress" {
@@ -216,6 +216,6 @@ resource "aws_security_group" "allow_connections_jitsi-meet" {
 
 
   tags = {
-    Name = "allow_connections_jitsi-meet"
+    Name = "allow_connections_jitsi-meet-${local.subdomain}"
   }
 }
