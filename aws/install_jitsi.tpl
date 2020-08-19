@@ -57,6 +57,11 @@ echo $EMAIL | /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh >> /debu
 # Enable local STUN server
 sed -e "s/org\.ice4j\.ice\.harvest\.STUN_MAPPING_HARVESTER_ADDRESSES=.*/org.ice4j.ice.harvest.STUN_MAPPING_HARVESTER_ADDRESSES=$HOSTNAME:5349/" -i /etc/jitsi/videobridge/sip-communicator.properties
 
+# Remove jitsi watermark
+sudo sed -e 's/SHOW_WATERMARK_FOR_GUESTS: true,/SHOW_WATERMARK_FOR_GUESTS: false,/' -i /usr/share/jitsi-meet/interface_config.js
+sudo sed -e 's/SHOW_JITSI_WATERMARK: true,/SHOW_JITSI_WATERMARK: false,/' -i /usr/share/jitsi-meet/interface_config.js
+
+
 #echo "Enabling Moderator credentials for $ADMIN_USER" >> /debug.txt
 #prosodyctl --config /etc/prosody/prosody.cfg.lua register $ADMIN_USER $HOSTNAME $ADMIN_PASSWORD
 
