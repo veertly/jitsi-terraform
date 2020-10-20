@@ -39,7 +39,8 @@ whoami >> /debug.txt
 cat /etc/hosts >> /debug.txt
 # Install Jitsi
 #apt install -y jitsi-meet >> /debug.txt
-apt install -y jitsi-meet=2.0.5076-1 >> /debug.txt
+#apt install -y jitsi-meet=2.0.5076-1 >> /debug.txt
+apt-get install jitsi-meet-prosody=1.0.4428-1 jitsi-meet=2.0.5076-1 jicofo=1.0-636-1 jitsi-meet-web=1.0.4428-1 jitsi-meet-web-config=1.0.4428-1 jitsi-videobridge2=2.1-351-g0bfaac1c-1  jitsi-meet-turnserver=1.0.4428-1 -y >> /debug.txt
 
 
 # letsencrypt
