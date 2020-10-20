@@ -38,7 +38,10 @@ cat /etc/resolv.conf >> /debug.txt
 whoami >> /debug.txt
 cat /etc/hosts >> /debug.txt
 # Install Jitsi
-apt install -y jitsi-meet >> /debug.txt
+#apt install -y jitsi-meet >> /debug.txt
+apt install -y jitsi-meet=2.0.5076-1 >> /debug.txt
+
+
 # letsencrypt
 echo $EMAIL | /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh >> /debug.txt
 
